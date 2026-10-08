@@ -1,0 +1,9 @@
+{
+  "lastChangelogVersion": "0.87.1",
+  "theme": "light",
+  "defaultProvider": "openai",
+  "defaultModel": "gpt-6-luna",
+  "packages": [
+    "git:github.com/obra/superpowers"
+  ]
+}
