@@ -67,8 +67,7 @@ EOF
     if ! command -v uv >/dev/null; then
       _sp_log "uv not found, skipping package install"
     else
-      chown -R 1000 /layers/renku_python-dependency-manager/uv_cache >> "$LOG" 2>&1 \
-        && _sp_log "uv_cache chown ok" || _sp_log "uv_cache chown FAILED"
+      rm -rf /home/renku/work/.uv_cache
       py="$venv/bin/python"
       for i in $(seq 1 30); do [ -x "$py" ] && break; sleep 1; done
       [ -x "$py" ] && uvargs=(--python "$py")
