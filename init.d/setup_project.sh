@@ -64,16 +64,12 @@ EOF
 
   # install the private package (editable) into the session venv with uv
   if [ -f "$dest/pyproject.toml" ]; then
-    if ! command -v uv >/dev/null; then
-      _sp_log "uv not found, skipping package install"
-    else
-      rm -rf /home/renku/work/.uv_cache
-      py="$venv/bin/python"
-      for i in $(seq 1 30); do [ -x "$py" ] && break; sleep 1; done
-      [ -x "$py" ] && uvargs=(--python "$py")
-      uv pip install "${uvargs[@]}" -e "$dest" >> "$LOG" 2>&1 \
-        && _sp_log "uv install ok (python=${py})" || _sp_log "uv install FAILED"
-    fi
+    rm -rf /home/renku/work/.uv_cache
+    py="$venv/bin/python"
+    for i in $(seq 1 30); do [ -x "$py" ] && break; sleep 1; done
+    [ -x "$py" ] && uvargs=(--python "$py")
+    uv pip install "${uvargs[@]}" -e "$dest" >> "$LOG" 2>&1 \
+      && _sp_log "uv install ok (python=${py})" || _sp_log "uv install FAILED"
   fi
 }
 _sp_main
